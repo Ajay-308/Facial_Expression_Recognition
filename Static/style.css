@@ -267,8 +267,8 @@ a {
     height: 200px;
   }
   
-  .opportunity__icon {
-  }
+  /* .opportunity__icon {
+  } */
   
   .opportunity__title {
     font-size: 1.8rem;
@@ -354,7 +354,7 @@ a {
     .header__logo {
       display: block;
     } */
-  }
+  /* } */
   .footer {
     position: relative;
   }
@@ -590,9 +590,9 @@ a {
     padding-left: 30%;
     /* padding-right: 20%; */
   }
-  .container-1 h2 {
+  /* .container-1 h2 {
     /* width: 100%; */
-  }
+  } */
   .container-2 {
     order: 1;
     width: 100%;
