@@ -1,9 +1,5 @@
 tensorflow
 keras
-pandas
-numpy
-jupyter
-notebook
 tqdm
 opencv-contrib-python
 waitress
