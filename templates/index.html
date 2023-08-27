@@ -5,18 +5,19 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Facial_expression_recognnition</title>
     <link rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"">
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <link
       rel="stylesheet"
-      href="/Facial_Expression_Recognition/Static/style.css"
+      href="{{ url_for('static', filename='style.css') }}"
     />
+    <!-- { url_for('static', filename='image/windmill.gif') } -->
   </head>
   <body>
     <header class="header">
       <nav class="navbar">
         <a href="#" class="nav-logo"
           ><img
-            src="/Facial_Expression_Recognition/Static/face-scan.gif"
+            src="{{ url_for('static', filename='face-scan.gif') }} "
             alt=""
           />
         </a>
@@ -48,19 +49,19 @@
         </p>
         <p>You can either upload an image or go live !!!</p>
         <div class="button">
-          <a href="#" class="btn btn__hero use">Upload </a>
-          <a href="#" class="btn btn__hero use">Go live</a>
+          <a href="{{url_for('upload_image')}}" class="btn btn__hero use">Upload </a>
+          <a href="{{url_for('video_feed')}}" class="btn btn__hero use">Go live</a>
         </div>
       </div>
       <div class="container-2">
         <img
-          src="/Facial_Expression_Recognition//Static/face-recognition.png"
+          src="{{ url_for('static', filename='face-recognition.png') }}"
           alt=""
         />
       </div>
       <div class="container-3">
         <a href="#" class="btn btn__hero use">Upload </a>
-        <a href="#" class="btn btn__hero use">Go live</a>
+        <a href="{{url_for('video_feed')}}" class="btn btn__hero use">Go live</a>
       </div>
     </section>
 
@@ -75,7 +76,7 @@
           </div>
           <div class="opportunities__body">
               <div class="opportunity">
-                  <img src="/Facial_Expression_Recognition/Static/accuracy.png" alt="" class="crop_img">
+                  <img src="{{ url_for('static', filename='accuracy.png') }}" alt="" class="crop_img">
 
                   <h4 class="opportunity__title">Accuracy</h4>
                   <p class="opportunity__description">This model uses CNN deep learning techique and give an accuracy of more than 80 % .</p>
@@ -85,7 +86,7 @@
               </div>
 
               <div class="opportunity active">
-                  <img src="/Facial_Expression_Recognition/Static/project.png" alt="Icon" class="opportunity__icon">
+                  <img src="{{ url_for('static', filename='project.png') }}" alt="Icon" class="opportunity__icon">
                   <h4 class="opportunity__title">Detailed report</h4>
                   <p class="opportunity__description">
                       We have also done a detailed report of this project , where we discussed everything about its models , approch ,etc        .          </p>
@@ -94,7 +95,7 @@
 
               </div>
               <div class="opportunity">
-                <img src="/Facial_Expression_Recognition/Static/live-streaming.png" alt="" class="crop_img">
+                <img src="{{ url_for('static', filename='live-streaming.png') }}" alt="" class="crop_img">
 
                 <h4 class="opportunity__title">Live Vedio</h4>
                 <p class="opportunity__description">One of the special feature of Our project is that you can check your expression live .</p>
@@ -154,6 +155,7 @@
 
 
     </footer>
-    <script src="/Facial_Expression_Recognition/javascript/javascript.js"></script>
+    <script src="{{ url_for('static', filename='javascript/javascript.js') }}"></script>
+
   </body>
 </html>

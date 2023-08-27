@@ -5,14 +5,30 @@ from flask import Flask, render_template, request, Response
 
 app = Flask(__name__)
 
-json_file = open("facialemotionmodel.json", "r")
+json_file = open("emotiondetector.json", "r")
 model_json = json_file.read()
 json_file.close()
 model = model_from_json(model_json)
-model.load_weights("facialemotionmodel.h5")
+model.load_weights("emotiondetector.h5")
 
 haar_file = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(haar_file)
+
+@app.route('/home')
+def home():
+    return render_template('index.html')
+
+@app.route('/')
+def index():
+    return render_template('index.html')
+
+@app.route('/UploadImage/')
+def upload_image():
+    return render_template('upload.html')
+
+@app.route('/video_feed')
+def video_feed():
+    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
 
 def extract_features(image):
     feature = np.array(image)
@@ -36,9 +52,7 @@ def predict_emotion(image):
 
 labels = {0: 'angry', 1: 'disgust', 2: 'fear', 3: 'happy', 4: 'neutral', 5: 'sad', 6: 'surprise'}
 
-@app.route('/')
-def index():
-    return render_template('index.html')
+
 
 def generate_frames():
     camera = cv2.VideoCapture(0)
@@ -54,9 +68,7 @@ def generate_frames():
                 yield (b'--frame\r\n'
                        b'Content-Type: image/jpeg\r\n\r\n' + frame + b'\r\n')
 
-@app.route('/video_feed')
-def video_feed():
-    return Response(generate_frames(), mimetype='multipart/x-mixed-replace; boundary=frame')
+
 
 if __name__ == '__main__':
     app.run(debug=True)
