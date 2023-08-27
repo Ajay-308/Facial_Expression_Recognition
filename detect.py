@@ -21,7 +21,7 @@ def home():
 def index():
     return render_template('index.html')
 
-@app.route('/UploadImage',method=['POST'])
+@app.route('/UploadImage',methods=['POST'])
 def upload_image():
     return render_template('upload.html')
 
@@ -60,6 +60,45 @@ def upload_image():
                 img_data = img_encoded.tobytes()
                 return render_template('upload.html', img_data=img_data)
     return render_template('upload.html')
+
+# def upload_image():
+#     global im, result, percentage , i , imageName , solution
+#     target = os.path.join(APP_ROOT, 'static\\')
+#     print(f'Target : {target}')
+
+#     if not os.path.isdir(target):
+#         os.mkdir(target)
+#     for imgg in os.listdir(target):
+#         try:
+#             imgPath = target + imgg
+#             os.remove(imgPath)
+#             print(f'Removed : {imgPath}')
+#         except Exception as e:
+#             print(e)
+        
+#     for file in request.files.getlist("file"):
+#         print(f'File : {file}')
+#         i += 1
+#         imageName = str(i) + '.JPG'
+#         filename = file.filename
+#         destination = "/".join([target, imageName])
+#         print(f'Destination : {destination}')
+#         file.save(destination)
+#         print('analysing Image')
+#         try:
+#             image = os.listdir('static')
+#             im = destination
+#             print(f'Analysing Image : {im}')
+#         except Exception as e:
+#             print(e)
+#         result = "Failed to Analyse"
+#         percentage = "0 %"
+#         try:
+#             detect()
+#             solution = solutions(result)
+#         except Exception as e:
+#             print(f'Error While Loading : {e}')  
+#     return render_template('complete.html', name=result, accuracy=percentage , img = imageName , soln = solution)
 
 labels = {0: 'angry', 1: 'disgust', 2: 'fear', 3: 'happy', 4: 'neutral', 5: 'sad', 6: 'surprise'}
 
