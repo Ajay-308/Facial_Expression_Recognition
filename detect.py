@@ -21,9 +21,14 @@ def home():
 def index():
     return render_template('index.html')
 
-@app.route('/UploadImage',methods=['POST'])
+@app.route('/upload_image')
 def upload_image():
     return render_template('upload.html')
+
+
+
+# def upload_image():
+#     return render_template('upload.html')
 
 @app.route('/video_feed')
 def video_feed():

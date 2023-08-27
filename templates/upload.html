@@ -88,14 +88,12 @@
     </div>
   <body>
     <div class="container-2">
-        <form
-          id="upload-form"
-          action="{{ url_for('upload_image') }}"
-          method="POST"
-          enctype="multipart/form-data"
-          action="/predict_emotion"
-        >
-        
+      <form
+      id="upload-form"
+      action="{{ url_for('upload_image') }}"
+      method="POST" 
+      enctype="multipart/form-data"
+    >
           <input id="file-picker" type="file" name="file" accept="image/*" />
           <input type="submit" value="Upload!" id="upload-button" />
         </form>
