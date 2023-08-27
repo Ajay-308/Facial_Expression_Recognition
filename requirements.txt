@@ -6,3 +6,5 @@ jupyter
 notebook
 tqdm
 opencv-contrib-python
+waitress
+Flask==2.2.3
