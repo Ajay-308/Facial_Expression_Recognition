@@ -4,3 +4,5 @@ tqdm
 opencv-contrib-python
 waitress
 Flask==2.2.3
+scikit-learn
+opencv_contrib_python==4.8.0.74
