@@ -13,7 +13,6 @@ model.load_weights("emotiondetector.h5")
 
 haar_file = cv2.data.haarcascades + 'haarcascade_frontalface_default.xml'
 face_cascade = cv2.CascadeClassifier(haar_file)
-
 @app.route('/home')
 def home():
     return render_template('index.html')
@@ -22,7 +21,7 @@ def home():
 def index():
     return render_template('index.html')
 
-@app.route('/UploadImage/')
+@app.route('/UploadImage',method=['POST'])
 def upload_image():
     return render_template('upload.html')
 
@@ -49,6 +48,18 @@ def predict_emotion(image):
         return image
     except cv2.error:
         return None
+    
+def upload_image():
+    if request.method == 'POST':
+        uploaded_file = request.files['file']
+        if uploaded_file.filename != '':
+            image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
+            result_image = predict_emotion(image.copy())
+            if result_image is not None:
+                _, img_encoded = cv2.imencode('.jpg', result_image)
+                img_data = img_encoded.tobytes()
+                return render_template('upload.html', img_data=img_data)
+    return render_template('upload.html')
 
 labels = {0: 'angry', 1: 'disgust', 2: 'fear', 3: 'happy', 4: 'neutral', 5: 'sad', 6: 'surprise'}
 
