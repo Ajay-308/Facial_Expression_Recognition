@@ -1,6 +1,9 @@
 import cv2
-import numpy as np
-from keras.models import model_from_json
+from cv2 import numpy as np
+import base64
+import tensorflow
+from tensorflow import keras
+from tensorflow.keras.models import model_from_json
 from flask import Flask, render_template, request, Response
 
 app = Flask(__name__)
@@ -23,6 +26,20 @@ def index():
 
 @app.route('/upload_image')
 def upload_image():
+    return render_template('upload.html')
+
+@app.route('/uploadimage',methods=['POST'])
+def uploadimage():
+    if request.method == 'POST':
+        uploaded_file = request.files['file']
+        if uploaded_file.filename != '':
+            image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
+            result_image = predict_emotion(image.copy())
+            if result_image is not None:
+             _, img_encoded = cv2.imencode('.jpg', result_image)
+             img_base64 = base64.b64encode(img_encoded).decode('utf-8')
+        return render_template('result.html', img_data=img_base64)
+
     return render_template('upload.html')
 
 
@@ -53,18 +70,7 @@ def predict_emotion(image):
         return image
     except cv2.error:
         return None
-    
-def upload_image():
-    if request.method == 'POST':
-        uploaded_file = request.files['file']
-        if uploaded_file.filename != '':
-            image = cv2.imdecode(np.fromstring(uploaded_file.read(), np.uint8), cv2.IMREAD_COLOR)
-            result_image = predict_emotion(image.copy())
-            if result_image is not None:
-                _, img_encoded = cv2.imencode('.jpg', result_image)
-                img_data = img_encoded.tobytes()
-                return render_template('upload.html', img_data=img_data)
-    return render_template('upload.html')
+
 
 # def upload_image():
 #     global im, result, percentage , i , imageName , solution
