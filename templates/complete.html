@@ -8,7 +8,7 @@
     <br />
     <br />
     <br />
-    <img src="static\{{img}}" />
+    <img src="{{ url_for('static', filename=img) }}" alt="Uploaded Image" />
     <br />
     Image Uploaded Successfully
 
